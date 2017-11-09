@@ -1,5 +1,7 @@
 # Überauth Reddit
 
+[![Hex.pm](https://img.shields.io/hexpm/v/ueberauth_reddit.svg)](https://hex.pm/packages/ueberauth_reddit)
+
 > Reddit OAuth2 strategy for Überauth.
 
 ## Installation
