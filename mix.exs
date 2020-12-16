@@ -28,8 +28,8 @@ defmodule UeberauthReddit.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps() do
     [
-      {:oauth2, "~> 0.8"},
-      {:ueberauth, "~> 0.4"},
+      {:oauth2, "~> 2.0"},
+      {:ueberauth, "~> 0.6"},
       {:ex_doc, "~> 0.16", only: [:dev], runtime: false},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false}
     ]
