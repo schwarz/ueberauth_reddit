@@ -9,18 +9,18 @@ defmodule Ueberauth.Strategy.Reddit.OAuth do
   ]
 
   # Public API
-  @spec client(Keyword.t) :: OAuth2.Client.t
+  @spec client(Keyword.t()) :: OAuth2.Client.t()
   def client(opts \\ []) do
     config = Application.get_env(:ueberauth, Ueberauth.Strategy.Reddit.OAuth)
     json_library = Ueberauth.json_library()
-    
+
     @defaults
     |> Keyword.merge(config)
     |> Keyword.merge(opts)
     |> OAuth2.Client.new()
     |> OAuth2.Client.put_serializer("application/json", json_library)
   end
-  
+
   def authorize_url!(params \\ [], opts \\ []) do
     opts
     |> client()

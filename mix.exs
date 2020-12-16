@@ -9,7 +9,7 @@ defmodule UeberauthReddit.Mixfile do
       app: :ueberauth_reddit,
       version: @version,
       elixir: "~> 1.4",
-      start_permanent: Mix.env == :prod,
+      start_permanent: Mix.env() == :prod,
       description: "An Ueberauth strategy for Reddit authentication.",
       deps: deps(),
       name: "Ueberauth Reddit",
