@@ -29,7 +29,9 @@ defmodule UeberauthReddit.Mixfile do
   defp deps() do
     [
       {:oauth2, "~> 1.0 or ~> 2.0"},
-      {:ueberauth, "~> 0.6"},
+      # {:ueberauth, "~> 0.6"},
+      # Fix for now to avoid retired version
+      {:ueberauth, "0.10.5"},
       {:ex_doc, "~> 0.19", only: [:dev], runtime: false},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false}
     ]

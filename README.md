@@ -38,7 +38,8 @@
     ```elixir
     config :ueberauth, Ueberauth.Strategy.Reddit.OAuth,
       client_id: System.get_env("REDDIT_CLIENT_ID"),
-      client_secret: System.get_env("REDDIT_CLIENT_SECRET")
+      client_secret: System.get_env("REDDIT_CLIENT_SECRET"),
+      user_agent: "MyApp:#{Mix.Project.config()[:version]}"
     ```
 
 1.  Include the Überauth plug in your controller:
