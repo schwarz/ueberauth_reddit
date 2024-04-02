@@ -5,7 +5,6 @@ defmodule Ueberauth.Strategy.Reddit do
 
   use Ueberauth.Strategy, scope: "identity"
   alias Ueberauth.Auth.{Credentials, Info, Extra}
-  alias Ueberauth.Strategy.Reddit.OAuth
 
   @doc """
   Handles initial request for Reddit authentication.
@@ -13,13 +12,13 @@ defmodule Ueberauth.Strategy.Reddit do
   @spec handle_request!(Plug.Conn.t()) :: Plug.Conn.t()
   def handle_request!(conn) do
     scopes = conn.params["scope"] || Keyword.get(default_options(), :scope)
-    state = conn.params["state"] || random_string(32)
 
-    opts = [
-      redirect_uri: callback_url(conn),
-      scope: scopes,
-      state: state
-    ]
+    opts =
+      [
+        redirect_uri: callback_url(conn),
+        scope: scopes
+      ]
+      |> with_state_param(conn)
 
     redirect!(conn, Ueberauth.Strategy.Reddit.OAuth.authorize_url!(opts))
   end
@@ -112,12 +111,5 @@ defmodule Ueberauth.Strategy.Reddit do
       {:error, %OAuth2.Error{reason: reason}} ->
         set_errors!(conn, [error("OAuth2", reason)])
     end
-  end
-
-  # Taken from Phoenix secret generation task
-  defp random_string(length) do
-    :crypto.strong_rand_bytes(length)
-    |> Base.encode64()
-    |> binary_part(0, length)
   end
 end
