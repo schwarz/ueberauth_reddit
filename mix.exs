@@ -1,7 +1,7 @@
 defmodule UeberauthReddit.Mixfile do
   use Mix.Project
 
-  @version "0.2.0"
+  @version "0.3.0"
   @url "https://github.com/schwarz/ueberauth_reddit"
 
   def project() do
@@ -29,10 +29,8 @@ defmodule UeberauthReddit.Mixfile do
   defp deps() do
     [
       {:oauth2, "~> 1.0 or ~> 2.0"},
-      # {:ueberauth, "~> 0.6"},
-      # Fix for now to avoid retired version
-      {:ueberauth, "0.10.5"},
-      {:ex_doc, "~> 0.19", only: [:dev], runtime: false},
+      {:ueberauth, "~> 0.10"},
+      {:ex_doc, "~> 0.31", only: [:dev], runtime: false},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false}
     ]
   end
