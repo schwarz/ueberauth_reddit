@@ -10,58 +10,58 @@
 
 1. Add `:ueberauth_reddit` to your list of dependencies in `mix.exs`:
 
-    ```elixir
-    def deps do
-      [{:ueberauth_reddit, "~> 0.3"}]
-    end
-    ```
+   ```elixir
+   def deps do
+     [{:ueberauth_reddit, "~> 0.3"}]
+   end
+   ```
 
 1. Add the strategy to your applications:
 
-    ```elixir
-    def application do
-      [applications: [:ueberauth_reddit]]
-    end
-    ```
+   ```elixir
+   def application do
+     [applications: [:ueberauth_reddit]]
+   end
+   ```
 
 1. Add Reddit to your Überauth configuration:
 
-    ```elixir
-    config :ueberauth, Ueberauth,
-      providers: [
-        reddit: {Ueberauth.Strategy.Reddit, []}
-      ]
-    ```
+   ```elixir
+   config :ueberauth, Ueberauth,
+     providers: [
+       reddit: {Ueberauth.Strategy.Reddit, []}
+     ]
+   ```
 
-1.  Update your provider configuration:
+1. Update your provider configuration:
 
-    ```elixir
-    config :ueberauth, Ueberauth.Strategy.Reddit.OAuth,
-      client_id: System.get_env("REDDIT_CLIENT_ID"),
-      client_secret: System.get_env("REDDIT_CLIENT_SECRET"),
-      user_agent: "MyApp:#{Mix.Project.config()[:version]}"
-    ```
+   ```elixir
+   config :ueberauth, Ueberauth.Strategy.Reddit.OAuth,
+     client_id: System.get_env("REDDIT_CLIENT_ID"),
+     client_secret: System.get_env("REDDIT_CLIENT_SECRET"),
+     user_agent: "my-custom-user-agent" # optional
+   ```
 
-1.  Include the Überauth plug in your controller:
+1. Include the Überauth plug in your controller:
 
-    ```elixir
-    defmodule MyApp.AuthController do
-      use MyApp.Web, :controller
-      plug Ueberauth
-      ...
-    end
-    ```
+   ```elixir
+   defmodule MyApp.AuthController do
+     use MyApp.Web, :controller
+     plug Ueberauth
+     ...
+   end
+   ```
 
-1.  Create the request and callback routes if you haven't already:
+1. Create the request and callback routes if you haven't already:
 
-    ```elixir
-    scope "/auth", MyApp do
-      pipe_through :browser
+   ```elixir
+   scope "/auth", MyApp do
+     pipe_through :browser
 
-      get "/:provider", AuthController, :request
-      get "/:provider/callback", AuthController, :callback
-    end
-    ```
+     get "/:provider", AuthController, :request
+     get "/:provider/callback", AuthController, :callback
+   end
+   ```
 
 1. Your controller needs to implement callbacks to deal with `Ueberauth.Auth` and `Ueberauth.Failure` responses.
 

@@ -9,15 +9,13 @@ defmodule Ueberauth.Strategy.Reddit.OAuth do
     user_agent: "Uberauth-Reddit:#{Mix.Project.config()[:version]}"
   ]
 
-  @config Application.compile_env(:ueberauth, Ueberauth.Strategy.Reddit.OAuth, [])
-
   # Public API
   @spec client(Keyword.t()) :: OAuth2.Client.t()
   def client(opts \\ []) do
     json_library = Ueberauth.json_library()
 
     @defaults
-    |> Keyword.merge(@config)
+    |> Keyword.merge(config())
     |> Keyword.merge(opts)
     |> OAuth2.Client.new()
     |> OAuth2.Client.put_serializer("application/json", json_library)
@@ -51,7 +49,11 @@ defmodule Ueberauth.Strategy.Reddit.OAuth do
   end
 
   defp put_user_agent(client) do
-    user_agent = Keyword.get(@config, :user_agent, @defaults[:user_agent])
+    user_agent = Keyword.get(config(), :user_agent, @defaults[:user_agent])
     put_header(client, "User-Agent", user_agent)
+  end
+
+  defp config do
+    Application.get_env(:ueberauth, Ueberauth.Strategy.Reddit.OAuth, [])
   end
 end

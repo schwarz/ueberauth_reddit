@@ -31,7 +31,7 @@ defmodule UeberauthReddit.Mixfile do
       {:oauth2, "~> 1.0 or ~> 2.0"},
       {:ueberauth, "~> 0.10"},
       {:ex_doc, "~> 0.31", only: [:dev], runtime: false},
-      {:dialyxir, "~> 0.5", only: [:dev], runtime: false}
+      {:dialyxir, "~> 1.4", only: [:dev], runtime: false}
     ]
   end
 
