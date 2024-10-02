@@ -1,7 +1,7 @@
 defmodule UeberauthReddit.Mixfile do
   use Mix.Project
 
-  @version "0.3.0"
+  @version "0.4.0"
   @url "https://github.com/schwarz/ueberauth_reddit"
 
   def project() do
